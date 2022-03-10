@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: oom-deployment
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: oom
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: oom
+    spec:
+      containers:
+        - name: oom
+          image: quay.io/stephennimmo/oom:latest
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "2048Mi"
+              cpu: "500m"
